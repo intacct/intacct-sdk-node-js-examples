@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# JetBrains IDE
+.idea/
+
+# Creds for examples
+credentials.ini

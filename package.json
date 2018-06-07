@@ -1,0 +1,29 @@
+{
+  "name": "@intacct/intacct-sdk-examples",
+  "description": "Sage Intacct SDK for Node.js Examples",
+  "main": "index.js",
+  "keywords": [
+    "sage intacct",
+    "intacct",
+    "sage",
+    "sdk",
+    "examples"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intacct/intacct-sdk-node-js-examples.git"
+  },
+  "author": {
+    "name": "Sage Intacct, Inc.",
+    "url": "https://www.sageintacct.com"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://developer.intacct.com/tools/sdk-node-js/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@intacct/intacct-sdk": "^1.0.0",
+    "winston": "^2.4.0"
+  }
+}
