@@ -22,6 +22,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=6.9.0"
+  },
   "dependencies": {
     "@intacct/intacct-sdk": "^1.0.0",
     "winston": "^2.4.0"
