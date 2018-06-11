@@ -15,7 +15,7 @@
 
 const IA = require("@intacct/intacct-sdk");
 
-class AbstractTestObject extends IA.Functions.AbstractFunction {
+class AbstractTestObject extends IA.Functions.AbstractFunction.default {
     constructor(controlId) {
         super(controlId);
         this.integrationName = "test_object";
