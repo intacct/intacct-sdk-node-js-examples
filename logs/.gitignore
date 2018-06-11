@@ -1,0 +1,4 @@
+# Ignore log files in here
+*.log
+*.txt
+*.html
