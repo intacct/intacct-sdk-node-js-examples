@@ -14,7 +14,7 @@
  */
 
 /**
- * @return {Logger}
+ * @return {winston.LoggerInstance}
  */
 exports.logger = function() {
     const winston = require("winston");
@@ -31,7 +31,7 @@ exports.logger = function() {
 };
 
 /**
- * @param {Logger} logger
+ * @param {winston.LoggerInstance} logger
  * @return {OnlineClient}
  */
 exports.client = function (logger) {
