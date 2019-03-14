@@ -38,7 +38,7 @@ exports.client = function (logger) {
     const IA = require("@intacct/intacct-sdk");
     const path = require("path");
 
-    const clientConfig = new IA.ClientConfig();
+    let clientConfig = new IA.ClientConfig();
     clientConfig.profileFile = path.join(__dirname, "credentials.ini");
     clientConfig.logger = logger;
 

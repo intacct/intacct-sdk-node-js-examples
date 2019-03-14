@@ -18,7 +18,7 @@ customObjectFunction();
 async function customObjectFunction() {
     const bootstrap = require("./bootstrap");
     const IA = require("@intacct/intacct-sdk");
-    const logger = bootstrap.logger();
+    let logger = bootstrap.logger();
 
     try {
         const client = bootstrap.client(logger);
@@ -27,7 +27,7 @@ async function customObjectFunction() {
 
         logger.info("Executing create test object function to API");
         
-        const create = new TestObject.TestObjectCreate();
+        let create = new TestObject.TestObjectCreate();
         create.name = "hello world";
 
         const createResponse = await client.execute(create);

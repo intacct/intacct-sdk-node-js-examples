@@ -18,12 +18,12 @@ listVendors();
 async function listVendors() {
     const bootstrap = require("./bootstrap");
     const IA = require("@intacct/intacct-sdk");
-    const logger = bootstrap.logger();
+    let logger = bootstrap.logger();
 
     try {
         const client = bootstrap.client(logger);
 
-        const query = new IA.Functions.Common.ReadByQuery();
+        let query = new IA.Functions.Common.ReadByQuery();
         query.objectName = "VENDOR";
         query.pageSize = 2; // Keep the count to just 2 for the example
         query.fields = [
@@ -45,7 +45,7 @@ async function listVendors() {
         let i = 1;
         while (result.numRemaining > 0 && i <= 3 && result.resultId != null) {
             i++;
-            const more = new IA.Functions.Common.ReadMore();
+            let more = new IA.Functions.Common.ReadMore();
             more.resultId = result.resultId;
 
             const responseMore = await client.execute(more);

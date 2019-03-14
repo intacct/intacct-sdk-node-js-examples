@@ -18,14 +18,14 @@ crudCustomer();
 async function crudCustomer() {
     const bootstrap = require("./bootstrap");
     const IA = require("@intacct/intacct-sdk");
-    const logger = bootstrap.logger();
+    let logger = bootstrap.logger();
 
     try {
         const client = bootstrap.client(logger);
 
         logger.info("Executing CRUD customer functions to API");
 
-        const create = new IA.Functions.AccountsReceivable.CustomerCreate();
+        let create = new IA.Functions.AccountsReceivable.CustomerCreate();
         create.customerName = "Joshua Granley";
         create.active = false;
 
@@ -37,7 +37,7 @@ async function crudCustomer() {
 
         console.log("Created inactive customer ID " + customerId);
 
-        const update = new IA.Functions.AccountsReceivable.CustomerUpdate();
+        let update = new IA.Functions.AccountsReceivable.CustomerUpdate();
         update.customerId = customerId;
         update.active = true;
 
@@ -45,7 +45,7 @@ async function crudCustomer() {
 
         console.log("Updated customer ID " + customerId + " to active");
 
-        const read = new IA.Functions.Common.Read();
+        let read = new IA.Functions.Common.Read();
         read.objectName = "CUSTOMER";
         read.fields = [
             "RECORDNO",
@@ -60,7 +60,7 @@ async function crudCustomer() {
 
         console.log("Read customer ID " + customerId);
 
-        const del = new IA.Functions.AccountsReceivable.CustomerDelete();
+        let del = new IA.Functions.AccountsReceivable.CustomerDelete();
         del.customerId = customerId;
 
         const deleteResponse = await client.execute(del);

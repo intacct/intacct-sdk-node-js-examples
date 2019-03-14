@@ -18,12 +18,12 @@ gettingStarted();
 async function gettingStarted() {
     const bootstrap = require("./bootstrap");
     const IA = require("@intacct/intacct-sdk");
-    const logger = bootstrap.logger();
+    let logger = bootstrap.logger();
 
     try {
         const client = bootstrap.client(logger);
 
-        const query = new IA.Functions.Common.ReadByQuery();
+        let query = new IA.Functions.Common.ReadByQuery();
         query.objectName = "VENDOR";
         query.pageSize = 1; // Keep the count to just 1 for the example
         query.fields = [
