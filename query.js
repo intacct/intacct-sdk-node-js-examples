@@ -13,9 +13,10 @@
  * permissions and limitations under the License.
  */
 
-gettingStarted();
+query();
 
-async function gettingStarted() {
+async function query() {
+
     const bootstrap = require("./bootstrap");
     const IA = require("@intacct/intacct-sdk");
     let logger = bootstrap.logger();
@@ -23,14 +24,26 @@ async function gettingStarted() {
     try {
         const client = bootstrap.client(logger);
 
-        let query = new IA.Functions.Common.ReadByQuery();
-        query.objectName = "VENDOR";
-        query.pageSize = 1; // Keep the count to just 1 for the example
-        query.fields = [
-            "RECORDNO",
-            "VENDORID",
-            "NAME",
-        ];
+        let filter = new IA.Functions.Common.NewQuery.QueryFilter.OrOperator();
+        filter.addFilter(new IA.Functions.Common.NewQuery.QueryFilter.Filter("CUSTOMERID").like("c%"));
+        filter.addFilter(new IA.Functions.Common.NewQuery.QueryFilter.Filter("CUSTOMERID").like("1%"));
+
+        let orderBuilder = new IA.Functions.Common.NewQuery.QueryOrderBy.OrderBuilder();
+        orderBuilder.addDescending("CUSTOMERID");
+        const orders = orderBuilder.orders;
+
+        let selectBuilder = new IA.Functions.Common.NewQuery.QuerySelect.SelectBuilder();
+        selectBuilder.addFields(["CUSTOMERID", "CUSTOMERNAME"])
+            .addSum("TOTALDUE");
+        const selects = selectBuilder.selects;
+
+        let query = new IA.Functions.Common.NewQuery.Query();
+        query.selectFields = selects;
+        query.fromObject = "ARINVOICE";
+        query.filter = filter; // Comment out this line to see all invoices without any filtering
+        query.caseInsensitive = true;
+        query.pageSize = 100;
+        query.orderBy = orders;
 
         logger.info("Executing query to Intacct API");
 
@@ -45,8 +58,17 @@ async function gettingStarted() {
             "Data": result.data,
         });
 
-        console.log("Success! Number of vendor objects found: " + result.totalCount.toString());
+        let json_data = result.data;
 
+        if (json_data && Array.isArray(json_data) && json_data.length >= 1) {
+            console.log(`Success! Total number of results: ${ result.totalCount.toString() }\n`);
+            console.log(`First ARINVOICE result found: ${ JSON.stringify(json_data[0]) }`);
+            console.log("See the log file (logs/intacct.html) for the complete list of results.\n");
+        }  else {
+            console.log("The query executed, but no ARINVOICE objects met the query criteria.\n");
+            console.log("Either modify the filter or comment it out from the query.\n");
+            console.log("See the log file (logs/intacct.html) for the XML request.\n");
+        }
     } catch (ex) {
         if (ex instanceof IA.Exceptions.ResponseException) {
             logger.error("An Intacct response exception was thrown", {
