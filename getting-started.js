@@ -23,21 +23,21 @@ async function gettingStarted() {
     try {
         const client = bootstrap.client(logger);
 
-        let query = new IA.Functions.Common.ReadByQuery();
-        query.objectName = "VENDOR";
-        query.pageSize = 1; // Keep the count to just 1 for the example
-        query.fields = [
-            "RECORDNO",
-            "VENDORID",
-            "NAME",
+        let read = new IA.Functions.Common.Read();
+        read.objectName = "CUSTOMER";
+        read.fields = [
+            "RECORDNO", "CUSTOMERID", "NAME"
+        ]
+        read.keys = [
+            33  // Replace with the record number of a customer in your company
         ];
 
-        logger.info("Executing query to Intacct API");
+        logger.info("Executing read to Intacct API");
 
-        const response = await client.execute(query);
+        const response = await client.execute(read);
         const result = response.getResult();
 
-        logger.debug("Query successful", {
+        logger.debug("Read successful", {
             "Company ID": response.authentication.companyId,
             "User ID": response.authentication.userId,
             "Request control ID": response.control.controlId,
@@ -45,7 +45,10 @@ async function gettingStarted() {
             "Data": result.data,
         });
 
-        console.log("Success! Number of vendor objects found: " + result.totalCount.toString());
+        let json_data = result.data;
+
+        console.log("Result:");
+        console.log( JSON.stringify(json_data) )
 
     } catch (ex) {
         if (ex instanceof IA.Exceptions.ResponseException) {
