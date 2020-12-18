@@ -48,8 +48,7 @@ async function gettingStarted() {
         let json_data = result.data;
 
         console.log("Result:");
-        console.log( JSON.stringify(json_data) )
-
+        console.log( JSON.stringify(json_data) );
     } catch (ex) {
         if (ex instanceof IA.Exceptions.ResponseException) {
             logger.error("An Intacct response exception was thrown", {

@@ -23,10 +23,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.18.1"
   },
   "dependencies": {
-    "@intacct/intacct-sdk": "^1.3.0",
-    "winston": "^2.4.4"
+    "@intacct/intacct-sdk": "^2.0.0",
+    "winston": "^3.3.3"
   }
 }
