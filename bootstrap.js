@@ -14,13 +14,13 @@
  */
 
 /**
- * @return {winston.LoggerInstance}
+ * @return {winston.Logger}
  */
 exports.logger = function() {
     const winston = require("winston");
     const path = require("path");
 
-    return new winston.Logger({
+    return new winston.createLogger({
         transports: [
             new winston.transports.File({
                 level: "debug",
@@ -31,7 +31,7 @@ exports.logger = function() {
 };
 
 /**
- * @param {winston.LoggerInstance} logger
+ * @param {winston.Logger} logger
  * @return {OnlineClient}
  */
 exports.client = function (logger) {
