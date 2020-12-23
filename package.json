@@ -26,7 +26,7 @@
     "node": ">=12.18.1"
   },
   "dependencies": {
-    "@intacct/intacct-sdk": "^2.0.0",
+    "@intacct/intacct-sdk": "^2.1.0",
     "winston": "^3.3.3"
   }
 }
